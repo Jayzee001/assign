@@ -1,6 +1,4 @@
 import React from 'react'
-// import Gomycode from './gomycode'
-// import UseRedusa from './Ref'
 import UseRedusa from './UseRedu/UseRedusa'
 import 'font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
@@ -16,11 +14,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-// import Button from 'react-bootstrap/Button';
-// import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-// import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as yup from 'yup';
 
@@ -32,7 +27,7 @@ function App() {
 
   let firstName = 'Johnmary';
     const { Formik } = formik;
-
+// this is the message/resp when the field is empty
   const schema = yup.object().shape({
     firstName: yup.string().required("hello there"),
   });
@@ -42,6 +37,7 @@ function App() {
         <div className='app'>
           <h1>Your Spicy Meal</h1>
     <Row xs={1} md={2} className="g-4">
+      // the reason why the are 4 cards 
             {Array.from({ length: 4 }).map((products, idx) => (
               <Col key={idx}  >
                 <div className="cardss">
@@ -62,9 +58,10 @@ function App() {
                       </Card.Text>
                     </Card.Body>
                   </Card>
-                  {/* <div className='message'> */}
+                // this is the bootstrap function which help in displaying my name when the mouse over on the button message
                   <OverlayTrigger
                     placement="bottom"
+//this is where the variable firstname was used and below is the response when we hover above the message button
                     overlay={<Tooltip id="button-tooltip-2"><span className='tip'>Hello {firstName}<span >
                       <img className="pics" src="https://i.pinimg.com/236x/8e/d1/11/8ed111d3b562b703ea9fd03521515b16.jpg" alt="img" />
                     </span></span></Tooltip>}
@@ -81,18 +78,25 @@ function App() {
                       </Button>
                     )}
                   </OverlayTrigger>
+                      //end of the button message function
+                      // the div that contain the input, validation and error resp. this was achievable by formik and yuq dependencies which can also be used in the normal way without react 
                   <div>
+                      //form 
      <Formik
+//the validator
       validationSchema={schema}
       onSubmit={console.log}
+// initial state of my input value
       initialValues={{
         firstName: '',
       }}>
+//handlers which will assist in the validation 
 {({ handleSubmit, handleChange, values, touched, errors }) => (
 <Form noValidate onSubmit={handleSubmit}>
 <Row className="mb-3">
 <Form.Group as={Col} md="4" controlId="validationFormik01">
 <Form.Label>First name</Form.Label>
+  //the form input using react_bootstrap
 <Form.Control
   type="text"
   name="firstName"
@@ -100,7 +104,9 @@ function App() {
   onChange={handleChange}
   isValid={touched.firstName && !errors.firstName}
                               />
+// the error message when the firstname field is empty
   {touched.firstName && errors.firstName && <h2>hello there</h2>}
+    // when the input is filled up the message resp is below.
   <Form.Control.Feedback><img src='https://i.pinimg.com/236x/b9/da/38/b9da389ba099a5525297192a49d402e1.jpg' alt="img" /></Form.Control.Feedback>
 </Form.Group>
 </Row>
@@ -108,6 +114,7 @@ function App() {
                         </Form>
                       )}
           </Formik>
+            //end of the form input.
                   </div>
                 </div>
               </Col>
